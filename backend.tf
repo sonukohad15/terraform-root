@@ -8,11 +8,16 @@ terraform {
     }
   }
 
- terraform {
   backend "s3" {
-    bucket = "young-minds-app-terraform-state69"
-    region = "us-east-1"
-    key = "project/terraform.tfstate"
+    bucket         = "young-minds-app-terraform-state69"
+    key            = "project/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-locks"
   }
+}
+
+provider "aws" {
+  region = "us-east-1"
 }
 
